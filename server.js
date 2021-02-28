@@ -23,20 +23,18 @@ server.set('view engine', 'ejs');
 server.get('/', (req, res) => {
     res.render('pages/index')
 })
-server.get('*',(req,res)=>{
-    res.render('pages/error')
-})
 
-// http://localhost:3500/search?searchBook=amman&author=on
+// http://localhost:3500/search?searchBook=flower&author=on
 server.get('/search', (req, res) => {
     let BookName = req.query.searchBook;
-    let select;
+    let select = req.query.sort
     //  res.redirect('pages/searches/show')
-    if (req.query.title) {
-        select = 'intitle'
-    } else if (req.query.author) {
-        select = 'inauthor'
-    }
+    // if (req.query.title) {
+    //     select = 'intitle'
+    // } else if (req.query.author) {
+    //     select = 'inauthor'
+    // }
+
 
     let url = `https://www.googleapis.com/books/v1/volumes?q=${BookName}+${select}:keyes`
 
@@ -57,6 +55,9 @@ function Books(bookData) {
     this.description = bookData.volumeInfo.description
 }
 
+server.get('*',(req,res)=>{
+    res.render('pages/error')
+})
 
 server.listen(PORT, () => {
     console.log(`Listening to Port ${PORT}`)

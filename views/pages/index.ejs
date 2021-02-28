@@ -5,23 +5,51 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="styles/reset.css">
+    <link rel="stylesheet" href="styles/base.css">
 </head>
 <body>
-    <h1>Books</h1>
-    <ul>
-        <li><a href="/">Home Page</a></li>
-        <li><a href="">Search For a Book</a></li>
-    </ul>
+    <header>
+        <h1 id="title">Best Books!</h1>
+        <div class="topnav">
+            <div class="menu"></div>
+            <div class="menu"></div>
+            <div class="menu"></div>
+        </div>
+    </header>
+    <main>
+
+        <div class="toggle"><a href="/">Home</a></div>
+        <div class="toggle" id="searchNav"><a href="#">Search</a></div>
+
+        <div id="topForm"><p>Search By Title Or Author</p></div>
     <form action="/search" class = 'form'>
-        <input type="text" placeholder="Enter a title or author" name="searchBook"><br>
+      
+        
+        <input id="searchBar" type="text" placeholder="Enter a Title Or Author" name="searchBook">
 
-        <label for="">Title</label>
-        <input type="radio" name="title"><br>
+        <div class="radio">
+            <label for="">Title&nbsp;&nbsp;&nbsp;</label>
+            <input type="radio" name="sort" value="intitle" class="rTitle" >
+        </div>
+       
+        <div class="radio">
+            <label for="">Author</label>
+            <input type="radio" name="sort" value="inauthor" class="rAuthor" >
+        </div>
+    
+     <a href="/search"><input type="submit" value="Search the Google Books API" id="submit"></a>
 
-        <label for="">Author</label>
-        <input type="radio" name="author"><br>
-
-     <a href="/search"><input type="submit" name="" id=""></a> 
     </form>
+
+    </main>
+    <footer>
+        <button></button>
+        <button></button>
+        <button></button>
+        <button></button>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>
