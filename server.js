@@ -10,7 +10,7 @@ server.use(cors());
 
 const superagent = require('superagent');
 
-const PORT = process.env.PORT || 4000
+const PORT = process.env.port || 4000
 
 server.use(express.static('./public'));
 server.use(express.urlencoded({ extended: true }));
