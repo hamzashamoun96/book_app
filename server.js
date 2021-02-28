@@ -10,7 +10,7 @@ server.use(cors());
 
 const superagent = require('superagent');
 
-const PORT = process.env.port || 4000
+const port = process.env.PORT || 4000
 
 server.use(express.static('./public'));
 server.use(express.urlencoded({ extended: true }));
@@ -59,6 +59,6 @@ server.get('*',(req,res)=>{
     res.render('pages/error')
 })
 
-server.listen(PORT, () => {
-    console.log(`Listening to Port ${PORT}`)
+server.listen(port, () => {
+    console.log(`Listening to Port ${port}`)
 })
