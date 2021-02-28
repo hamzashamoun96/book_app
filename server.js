@@ -45,6 +45,9 @@ server.get('/search', (req, res) => {
             })
             res.render('pages/searches/show',{bookMenu : bookArr })
         })
+        .catch((error)=>{
+            res.send('ERROR',error.message)
+        })
 
 })
 
