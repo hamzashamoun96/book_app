@@ -1,0 +1,106 @@
+@media (max-width:500px){
+    body{
+        background-color: rgb(167, 167, 167);
+    }
+    header{
+        position: fixed;
+        top: 0px;
+        width: 100%;
+        display: grid;
+        height: 50px;
+        background-color: black;
+        grid-template-columns: 10fr 1fr ;
+    }
+    footer{
+        position: fixed;
+        bottom: 0px;
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        height: 50px;
+        background-color: black;
+    }
+    .menu{
+        width: 35px;
+        height: 4px;
+        background-color: black;
+        margin: 6px 0;
+        grid-column: 2/3;
+        background-color: white;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    #title{
+        grid-column: 1/2;
+        color: rgb(235, 235, 235);
+        font-size: 25px;
+        padding: 10px 0 0 10px;
+    }
+    .topnav{
+        cursor: pointer;
+        padding: 6px 0 0 0 ;
+    }
+    #searchNav{
+        cursor: pointer;
+        border-top: 0px;
+    }
+    button{
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+    }
+    .card{
+        width: 80%;
+        margin: 100px auto;
+        background-color: lightgray;
+        border: 3px solid gray;
+        box-shadow:5px 5px 5px 5px gray;
+    }
+    .card img{
+        display: block;
+        margin: 10px auto;
+    }
+    .card h2{
+        font-size: 20px;
+        font-weight: 700;
+        text-align: center;
+        margin: 15px;
+    }
+    .card p{
+        font-size:18px;
+        margin: 10px;
+        text-align: center;
+    }
+    #topForm{
+        text-align: center;
+        height: 50px;
+        background-color: rgb(85, 85, 85);
+        color: white;
+        margin-top: 50px;
+    }
+    #topForm p{
+        padding-top: 18px;
+        font-size: 15px;
+    }
+    a{
+        text-decoration: none;
+        color: white;
+        cursor: pointer;
+        padding-top: 18px;
+        display: block;
+    }
+    .toggle{
+        height: 50px;
+        background-color: gray;
+        text-align: center;
+        border: 1px solid black;
+        display: none;
+    }
+    .toggle:hover{
+        background-color:rgb(82, 82, 82);
+    }
+    #firstToggle{
+        margin-top:50px;
+    }
+}
