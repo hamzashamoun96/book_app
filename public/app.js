@@ -5,7 +5,5 @@ $('.topnav').on('click', ()=>{
 })
 
 $('#searchNav').on('click', ()=>{
-    $('.form').toggle()
-    $('#topForm').toggle()
     $('.toggle').toggle()
 })

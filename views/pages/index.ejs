@@ -1,54 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="styles/reset.css">
-    <link rel="stylesheet" href="styles/base.css">
-</head>
+    <%-include('../layout/head')%>
 <body>
-    <header>
-        <h1 id="title">Best Books!</h1>
-        <div class="topnav">
-            <div class="menu"></div>
-            <div class="menu"></div>
-            <div class="menu"></div>
-        </div>
-    </header>
+    <%-include('../layout/header')%>
     <main>
 
         <div class="toggle"><a href="/">Home</a></div>
-        <div class="toggle" id="searchNav"><a href="#">Search</a></div>
+        <div class="toggle" id="searchNav"><a href="/searches">Search</a></div>
 
         <div id="topForm"><p>Search By Title Or Author</p></div>
-    <form action="/search" class = 'form'>
-      
+
+        <section>
+            <% let count = 0; %>
+            <% homeData.forEach(value =>{ %>
+                <%count++;%>  
+                
+            <div class="card">
+                <img src="<%= value.image_url %>" alt="">
+                <h2><%= value.title %> </h2>
+                <h2><%= value.author %></h2>
+                <p><%= value.description %></p>
+                <form action="/books/<%= value.id%>">
+                    <button id="btn" type="submit"> View Details </button>
+                </form>
+            </div>
+       <% }) %>
+        </section>
+         <h5><%= count%> Books in the Collection</h5>
         
-        <input id="searchBar" type="text" placeholder="Enter a Title Or Author" name="searchBook">
-
-        <div class="radio">
-            <label for="">Title&nbsp;&nbsp;&nbsp;</label>
-            <input type="radio" name="sort" value="intitle" class="rTitle" >
-        </div>
-       
-        <div class="radio">
-            <label for="">Author</label>
-            <input type="radio" name="sort" value="inauthor" class="rAuthor" >
-        </div>
-    
-     <a href="/search"><input type="submit" value="Search the Google Books API" id="submit"></a>
-
-    </form>
 
     </main>
-    <footer>
-        <button></button>
-        <button></button>
-        <button></button>
-        <button></button>
-    </footer>
+    <%-include('../layout/footer')%>
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="app.js"></script>
 </body>
