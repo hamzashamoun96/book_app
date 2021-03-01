@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Search</title>
-    <link rel="stylesheet" href="styles/reset.css">
-    <link rel="stylesheet" href="styles/layout.css">
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link rel="stylesheet" href="/styles/reset.css">
+        <link rel="stylesheet" href="/styles/base.css">
+        <link rel="stylesheet" href="/styles/layout.css">
+    </head>
 <body>
     <header>
         <h1 id="title">Best Books!</h1>
@@ -28,14 +29,26 @@
                 <h2><%= value.title %> </h2>
                 <h2><%= value.author %></h2>
                 <p><%= value.description %></p>
+
+                <form action="/addbook" method="POST">
+                    <input type="hidden" name="title" value="<%= value.title %>">
+                    <input type="hidden" name="author" value="<%= value.author %>">
+                    <input type="hidden" name="isbn" value="<%= value.isbn %>">
+                    <input type="hidden" name="image_url" value="<%= value.imgUrl %>">
+                    <input type="hidden" name="description" value="<%= value.description %>">
+                    <button type="submit" id="submit"> Add To My BookShelf </button>
+                </form>
+
+
+
             </div>
         <% }) %> 
     </main>
     <footer>
-        <button></button>
-        <button></button>
-        <button></button>
-        <button></button>
+        <button class="FB"></button>
+        <button class="FB"></button>
+        <button class="FB"></button>
+        <button class="FB"></button>
     </footer>
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="app.js"></script>
