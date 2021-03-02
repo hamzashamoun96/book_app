@@ -11,10 +11,8 @@
         <div id="topForm"><p>Search By Title Or Author</p></div>
 
         <section>
-            <% let count = 0; %>
+            <h5><%= count%> Books in the Collection</h5>
             <% homeData.forEach(value =>{ %>
-                <%count++;%>  
-                
             <div class="card">
                 <img src="<%= value.image_url %>" alt="">
                 <h2><%= value.title %> </h2>
@@ -26,7 +24,7 @@
             </div>
        <% }) %>
         </section>
-         <h5><%= count%> Books in the Collection</h5>
+         
         
 
     </main>
