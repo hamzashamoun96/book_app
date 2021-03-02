@@ -1,8 +1,6 @@
 @media (max-width:500px){
     body{
         background-color: rgb(167, 167, 167);
-        display: grid;
-        grid-template-rows: 10fr 103fr 10fr ;
     }
     header{
         grid-row: 1/2;
@@ -64,7 +62,9 @@
     .form{
         width: 80%;
         margin: auto;
+        padding-bottom: 10px;
     }
+
     #topForm{
         text-align: center;
         height: 50px;
@@ -76,9 +76,18 @@
         padding-top: 18px;
         font-size: 15px;
     }
-    #searchBar{
+    #searchBar,.inp{
         width: 98%;
         height: 45px;
+    }
+    .inp{
+        margin-bottom: 20px;
+        background-color: rgb(219, 219, 219);
+    }
+    textarea{
+        width: 99%;
+        margin-bottom: 20px;
+        background-color: rgb(219, 219, 219);
     }
     .radio{
         display: flex;
@@ -105,4 +114,34 @@
     .FB{
         border-radius: 50%;
     }
+    #aniDiv{
+        display: inline-flex;
+        margin: 20px 0px 20px 7%;
+    }
+    #aniDiv h4 , #aniDiv h3{
+        font-size: 25px;
+        font-weight: 700;
+        color: darkgoldenrod;
+    }
+    @keyframes move {
+        0%   { left:0px; top:0px;}
+        50%  {left:0px; top:3px;}
+        100% { left:0px; top:0px;}
+      }
+
+      #aniDiv h4 {
+        position: relative;
+        animation-name: move;
+        animation-duration: 1000ms;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+      }
+      #aniDiv h3{
+        position: relative;
+        animation-name: move;
+        animation-duration: 1000ms;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+        animation-delay: 500ms;
+      }
 }
