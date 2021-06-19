@@ -140,8 +140,8 @@ function Books(bookdata) {
 
 client.connect()
     .then(() => {
-        server.listen(port, () => {
-            console.log(`Listening to Port ${port}`)
+        server.listen(process.env.PORT, () => {
+            console.log(`Listening to Port ${process.env.PORT}`)
         });
     }).catch((e)=>{
         console.log(e.message)
