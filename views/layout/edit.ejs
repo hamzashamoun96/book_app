@@ -3,7 +3,10 @@
     <div id="aniDiv"> <h4>U</h4> <h3>P</h3> <h4>D</h4> <h3>A</h3> <h4>T</h4> <h3>E</h3> 
         &nbsp; &nbsp;<h4>T</h4> <h3>H</h3> <h4>I</h4> <h3>S</h3>
         &nbsp; &nbsp;<h4>B</h4> <h3>O</h3> <h4>O</h4> <h3>K</h3></div>
-    <form class="form" action="/books/<%=book.id%>?-method=put" method="POST">
+   
+   
+   
+        <form class="form" action="/books/<%=book.id%>?-method=put" method="POST">
         <h6>Title</h6>
         <input class="inp" type="text" name="title" value="<%= book.title %>"><br>
         <h6>Author</h6>
@@ -16,4 +19,8 @@
         <textarea name="description" placeholder="<%= book.description %>" id="" cols="30" rows="10"></textarea><br>
         <button id="upBtn" type="submit"> UPDATE </button>
     </form>
+
+
+
+
 </section>
