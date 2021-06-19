@@ -10,8 +10,8 @@ server.use(cors());
 
 
 const pg = require('pg')
-// const client = new pg.Client(process.env.DATABASE_URL)
-const client = new pg.Client({ connectionString: process.env.DATABASE_URL, ssl: { rejectUnauthorized: false } });
+const client = new pg.Client(process.env.DATABASE_URL)
+// const client = new pg.Client({ connectionString: process.env.DATABASE_URL, ssl: { rejectUnauthorized: false } });
 
 const superagent = require('superagent');
 
@@ -41,14 +41,12 @@ server.get('*', (req, res) => {               //  Wrong Route
 
 function homePageHandler(req, res) {
     let SQL = `SELECT * FROM book;`
-    try {
-        client.query(SQL)
-            .then(result => {
-                res.render('pages/index', { homeData: result.rows, count: result.rows.length })
-            })
-    } catch (error) {
-        console.error(error.message)
-    }
+    client.query(SQL)
+        .then(result => {
+            res.render('pages/index', { homeData: result.rows, count: result.rows.length })
+        }).catch(()=>{
+            console.log("ERROR")
+        })
 }
 
 function searchFormHandler(req, res) {
@@ -60,19 +58,16 @@ function infoHandler(req, res) {
     let select = req.body.sort
     let url = `https://www.googleapis.com/books/v1/volumes?q=+${select}:${BookName}`
 
-    try {
-        superagent.get(url)
-            .then(bookData => {
-                // console.log(bookData.body.items[0].volumeInfo.imageLinks.smallThumbnail)
-                let bookArr = bookData.body.items.map(val => {
-                    return new Books(val)
-                })
-                res.render('pages/searches/show', { bookMenu: bookArr })
+    superagent.get(url)
+        .then(bookData => {
+            // console.log(bookData.body.items[0].volumeInfo.imageLinks.smallThumbnail)
+            let bookArr = bookData.body.items.map(val => {
+                return new Books(val)
+            }).catch(()=>{
+                console.log("ERROR")
             })
-
-    } catch (error) {
-        console.error(error.message)
-    }
+            res.render('pages/searches/show', { bookMenu: bookArr })
+        })
 }
 
 function addHandler(req, res) {
@@ -80,30 +75,24 @@ function addHandler(req, res) {
     let Body = req.body
     let safeValues = [Body.title, Body.author, Body.isbn, Body.image_url, Body.description]
 
-    try {
-        client.query(SQL, safeValues)
-            .then(() => {
-                res.redirect('/')
-            })
-
-    } catch (error) {
-        console.error(error.message)
-    }
+    client.query(SQL, safeValues)
+        .then(() => {
+            res.redirect('/')
+        }).catch(()=>{
+            console.log("ERROR")
+        })
 }
 
 function detailsHandler(req, res) {
     // console.log(req.params)
     let SQL = `SELECT * FROM book WHERE id=$1;`
     let safeValue = [req.params.id]
-    try {
-        client.query(SQL, safeValue)
-            .then(result => {
-                res.render('pages/books/detail', { book: result.rows[0] })
-            })
-
-    } catch (error) {
-        console.error(error.message)
-    }
+    client.query(SQL, safeValue)
+        .then(result => {
+            res.render('pages/books/detail', { book: result.rows[0] })
+        }).catch(()=>{
+            console.log("ERROR")
+        })
 }
 
 function updateHandler(req, res) {
@@ -113,28 +102,24 @@ function updateHandler(req, res) {
 
     let SQL = `UPDATE book SET title=$1,author=$2,isbn=$3,image_url=$4,description=$5 WHERE id=$6;`
     let safeValues = [title, author, isbn, image_url, description, req.params.id]
-    try {
-        client.query(SQL, safeValues)
-            .then(() => {
-                res.redirect(`/books/${req.params.id}`)
-            })
-    } catch (error) {
-        console.error(error.message)
-    }
+    client.query(SQL, safeValues)
+        .then(() => {
+            res.redirect(`/books/${req.params.id}`)
+        }).catch(()=>{
+            console.log("ERROR")
+        })
 }
 
 function deleteHandler(req, res) {
     let SQL = `DELETE FROM book WHERE id=$1;`
     let safevalue = [req.params.id]
 
-    try {
-        client.query(SQL, safevalue)
-            .then(() => {
-                res.redirect('/');
-            })
-    } catch (error) {
-        console.error(error.message)
-    }
+    client.query(SQL, safevalue)
+        .then(() => {
+            res.redirect('/');
+        }).catch(()=>{
+            console.log("ERROR")
+        })
 }
 
 
@@ -158,4 +143,6 @@ client.connect()
         server.listen(port, () => {
             console.log(`Listening to Port ${port}`)
         });
-    });
+    }).catch(()=>{
+        console.log("ERROR")
+    })
