@@ -44,8 +44,6 @@ function homePageHandler(req, res) {
     client.query(SQL)
         .then(result => {
             res.render('pages/index', { homeData: result.rows, count: result.rows.length })
-        }).catch((e)=>{
-            console.log(e.message)
         })
 }
 
@@ -63,8 +61,6 @@ function infoHandler(req, res) {
             // console.log(bookData.body.items[0].volumeInfo.imageLinks.smallThumbnail)
             let bookArr = bookData.body.items.map(val => {
                 return new Books(val)
-            }).catch((e)=>{
-                console.log(e.message)
             })
             res.render('pages/searches/show', { bookMenu: bookArr })
         })
@@ -78,8 +74,6 @@ function addHandler(req, res) {
     client.query(SQL, safeValues)
         .then(() => {
             res.redirect('/')
-        }).catch((e)=>{
-            console.log(e.message)
         })
 }
 
@@ -90,8 +84,6 @@ function detailsHandler(req, res) {
     client.query(SQL, safeValue)
         .then(result => {
             res.render('pages/books/detail', { book: result.rows[0] })
-        }).catch((e)=>{
-            console.log(e.message)
         })
 }
 
@@ -105,8 +97,6 @@ function updateHandler(req, res) {
     client.query(SQL, safeValues)
         .then(() => {
             res.redirect(`/books/${req.params.id}`)
-        }).catch((e)=>{
-            console.log(e.message)
         })
 }
 
@@ -117,8 +107,6 @@ function deleteHandler(req, res) {
     client.query(SQL, safevalue)
         .then(() => {
             res.redirect('/');
-        }).catch((e)=>{
-            console.log(e.message)
         })
 }
 
@@ -140,9 +128,7 @@ function Books(bookdata) {
 
 client.connect()
     .then(() => {
-        server.listen(process.env.PORT, () => {
-            console.log(`Listening to Port ${process.env.PORT}`)
+        server.listen(port, () => {
+            console.log(`Listening to Port ${port}`)
         });
-    }).catch((e)=>{
-        console.log(e.message)
     })
