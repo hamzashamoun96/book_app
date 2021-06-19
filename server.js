@@ -41,10 +41,14 @@ server.get('*', (req, res) => {               //  Wrong Route
 
 function homePageHandler(req, res) {
     let SQL = `SELECT * FROM book;`
-    client.query(SQL)
-        .then(result => {
-            res.render('pages/index', { homeData: result.rows, count: result.rows.length })
-        })
+    try {
+        client.query(SQL)
+            .then(result => {
+                res.render('pages/index', { homeData: result.rows, count: result.rows.length })
+            })
+    } catch (error) {
+        console.error(error.message)
+    }
 }
 
 function searchFormHandler(req, res) {
@@ -56,14 +60,19 @@ function infoHandler(req, res) {
     let select = req.body.sort
     let url = `https://www.googleapis.com/books/v1/volumes?q=+${select}:${BookName}`
 
-    superagent.get(url)
-        .then(bookData => {
-            // console.log(bookData.body.items[0].volumeInfo.imageLinks.smallThumbnail)
-            let bookArr = bookData.body.items.map(val => {
-                return new Books(val)
+    try {
+        superagent.get(url)
+            .then(bookData => {
+                // console.log(bookData.body.items[0].volumeInfo.imageLinks.smallThumbnail)
+                let bookArr = bookData.body.items.map(val => {
+                    return new Books(val)
+                })
+                res.render('pages/searches/show', { bookMenu: bookArr })
             })
-            res.render('pages/searches/show', { bookMenu: bookArr })
-        })
+
+    } catch (error) {
+        console.error(error.message)
+    }
 }
 
 function addHandler(req, res) {
@@ -71,20 +80,30 @@ function addHandler(req, res) {
     let Body = req.body
     let safeValues = [Body.title, Body.author, Body.isbn, Body.image_url, Body.description]
 
-    client.query(SQL, safeValues)
-        .then(() => {
-            res.redirect('/')
-        })
+    try {
+        client.query(SQL, safeValues)
+            .then(() => {
+                res.redirect('/')
+            })
+
+    } catch (error) {
+        console.error(error.message)
+    }
 }
 
 function detailsHandler(req, res) {
     // console.log(req.params)
     let SQL = `SELECT * FROM book WHERE id=$1;`
     let safeValue = [req.params.id]
-    client.query(SQL, safeValue)
-        .then(result => {
-            res.render('pages/books/detail', { book: result.rows[0] })
-        })
+    try {
+        client.query(SQL, safeValue)
+            .then(result => {
+                res.render('pages/books/detail', { book: result.rows[0] })
+            })
+
+    } catch (error) {
+        console.error(error.message)
+    }
 }
 
 function updateHandler(req, res) {
@@ -94,20 +113,28 @@ function updateHandler(req, res) {
 
     let SQL = `UPDATE book SET title=$1,author=$2,isbn=$3,image_url=$4,description=$5 WHERE id=$6;`
     let safeValues = [title, author, isbn, image_url, description, req.params.id]
-    client.query(SQL, safeValues)
-        .then(() => {
-            res.redirect(`/books/${req.params.id}`)
-        })
+    try {
+        client.query(SQL, safeValues)
+            .then(() => {
+                res.redirect(`/books/${req.params.id}`)
+            })
+    } catch (error) {
+        console.error(error.message)
+    }
 }
 
 function deleteHandler(req, res) {
     let SQL = `DELETE FROM book WHERE id=$1;`
     let safevalue = [req.params.id]
 
-    client.query(SQL, safevalue)
-        .then(() => {
-            res.redirect('/');
-        })
+    try {
+        client.query(SQL, safevalue)
+            .then(() => {
+                res.redirect('/');
+            })
+    } catch (error) {
+        console.error(error.message)
+    }
 }
 
 
